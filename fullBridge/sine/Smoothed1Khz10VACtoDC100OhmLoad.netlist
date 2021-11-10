@@ -1,0 +1,19 @@
+Full-wave Rectifier with a Smoothing Capacitor Simulation
+V1 Vin 0 SINE ( 0 10 1Khz 0.0S )
+ D1 Vin Net1000 1n4004 
+ D2 Net1001 0 1n4004 
+ D3 0 Net1000 1n4004 
+ D4 Net1001 Vin 1n4004 
+ C1 Net1000 Net1001 100uF temp=50C
+ R1 Net1000 Net1001 100 
+.options rshunt = 1.0e12 KEEPOPINFO
+.MODEL 1N4004 D (IS=76.9n RS=42.0m  BV=400 IBV=5.00u CJO=39.8p M=0.333 N=1.45 TT=4.32u)
+.control
+OP
+* OP Let expressions, if any:
+
+write <rawfile> Net1000 Net1001 Vin  I(V1)
+set appendwrite true
+rusage everything
+.endc
+.end
